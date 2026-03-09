@@ -89,8 +89,8 @@ class StdioMCPClient(MCPToolClient):
             raise RuntimeError(f"{self.name} is not connected. Call connect() first.")
 
     def _normalize_tool_result(self, result: types.CallToolResult) -> Any:
-        if result.structured_content is not None:
-            return result.structured_content
+        if result.structuredContent is not None:
+            return result.structuredContent
 
         if not result.content:
             return None

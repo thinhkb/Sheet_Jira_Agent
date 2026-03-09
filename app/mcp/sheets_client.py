@@ -47,7 +47,7 @@ class GoogleSheetsMCPClient:
                 "spreadsheet_id": spreadsheet_id,
                 "sheet": sheet,
                 "range": cell_range,
-                "values": values,
+                "data": values,
             },
         )
 
@@ -62,7 +62,7 @@ class GoogleSheetsMCPClient:
         headers = [str(h).strip() for h in values[header_row_index]]
         rows: list[TaskRow] = []
 
-        for idx, row in enumerate(values[header_row_index + 1 :], start=header_row_index + 2):
+        for idx, row in enumerate(values[header_row_index + 1:], start=header_row_index + 2):
             row_map = {
                 headers[i]: row[i] if i < len(row) else ""
                 for i in range(len(headers))
@@ -76,16 +76,19 @@ class GoogleSheetsMCPClient:
                 TaskRow(
                     row_number=idx,
                     task_id=str(row_map.get("task_id", "") or "") or None,
+                    project_id=str(row_map.get("project_id", "") or "") or None,
                     task_name=task_name,
                     description=str(row_map.get("description", "") or ""),
+                    assignee=str(row_map.get("assignee", "") or "") or None,
+                    reporter=str(row_map.get("reporter", "") or "") or None,
                     project_key=str(row_map.get("project_key", "") or "") or None,
                     issue_type=str(row_map.get("issue_type", "") or "") or None,
                     jira_issue_key=str(row_map.get("jira_issue_key", "") or "") or None,
                     sync_status=str(row_map.get("sync_status", "") or "") or None,
                     priority=str(row_map.get("priority", "") or "") or None,
-                    assignee=str(row_map.get("assignee", "") or "") or None,
                     due_date=str(row_map.get("due_date", "") or "") or None,
                     status=str(row_map.get("status", "") or "") or None,
+                    last_updated=str(row_map.get("last_updated", "") or "") or None,
                     raw=row_map,
                 )
             )

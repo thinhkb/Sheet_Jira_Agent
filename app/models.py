@@ -7,16 +7,19 @@ from pydantic import BaseModel, Field
 class TaskRow(BaseModel):
     row_number: int
     task_id: Optional[str] = None
+    project_id: Optional[str] = None
     task_name: str
     description: str = ""
+    assignee: Optional[str] = None
+    reporter: Optional[str] = None
     project_key: Optional[str] = None
     issue_type: Optional[str] = None
     jira_issue_key: Optional[str] = None
     sync_status: Optional[str] = None
     priority: Optional[str] = None
-    assignee: Optional[str] = None
     due_date: Optional[str] = None
     status: Optional[str] = None
+    last_updated: Optional[str] = None
     raw: dict[str, Any] = Field(default_factory=dict)
 
 

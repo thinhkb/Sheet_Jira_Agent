@@ -10,9 +10,9 @@ class JiraMCPClient:
         self.client = client
 
     async def get_projects(self) -> Any:
-        return await self.client.call_tool("jira_get_projects", {})
+        return await self.client.call_tool("jira_get_all_projects", {})
 
-    async def search_issues(self, jql: str, limit: int = 20) -> Any:
+    async def search_issues(self, jql: str, limit: int = 50) -> Any:
         return await self.client.call_tool(
             "jira_search",
             {
@@ -45,12 +45,6 @@ class JiraMCPClient:
 
         if description:
             payload["description"] = description
-        if priority:
-            payload["priority"] = priority
-        if assignee:
-            payload["assignee"] = assignee
-        if due_date:
-            payload["due_date"] = due_date
 
         return await self.client.call_tool("jira_create_issue", payload)
 
