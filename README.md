@@ -198,7 +198,7 @@ cd sheet-jira-agent
 ### 2. Tạo virtual environment
 
 ```
-python -m venv .venv
+uv .venv
 ```
 
 Activate:
@@ -220,7 +220,7 @@ source .venv/bin/activate
 ### 3. Cài dependencies
 
 ```
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
 
 ---
